@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -48,6 +49,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+//        authorize 权限判断的错误提示
+        if ($exception instanceof AuthorizationException){
+            return redirect()->intended(route('posts.index'))->with('fail','无权限');
+        }
         return parent::render($request, $exception);
     }
 }

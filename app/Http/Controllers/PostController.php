@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\postRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view('home',compact('posts'));
     }
 
@@ -58,6 +59,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update',$post);
         return view('posts.edit',compact('post'));
     }
 
@@ -68,11 +70,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(postRequest $request, Post $post)
     {
-        $this->validate($request,[
-
-        ],[]);
+        $this->authorize('update',$post);
+        $post->update($request->all());
+        return redirect(route('posts.show',$post->id))->with('success','更新成功！');
     }
 
     /**
@@ -83,6 +85,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete',$post);
+        $post->delete();
+        return redirect()->back()->with('success','删除成功！');
     }
 }

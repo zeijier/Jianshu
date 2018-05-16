@@ -24,9 +24,9 @@ class postRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()){
-            case 'PATCH':
+            case 'PUT':
                 return [
-                    'title'=>'required|min:1',
+                    'title'=>'required|min:3',
                     'content'=>'required|min:2'
                 ];
             case 'POST':
