@@ -33,20 +33,20 @@ $(function () {
         //     });
         // }
         $.ajax({
-                    url:'http://jianshufind.xyz/star',
-                    method:'post',
-                    data:{'num':num,'id':user},
-                    datatype:'json',
-                    success:function () {
-                        if(num==1){
-                            target.attr("like-value",0);
-                            target.text('取消关注')
-                        }else {
-                            target.attr("like-value",1);
-                            target.text('关注')
-                        }
+            url:'http://jianshufind.xyz/star',
+            method:'post',
+            data:{'num':num,'id':user},
+            datatype:'json',
+            success:function () {
+                if(num==1){
+                    target.attr("like-value",0);
+                    target.text('取消关注')
+                }else {
+                    target.attr("like-value",1);
+                    target.text('关注')
+                }
 
-                    }
-                });
+            }
+        });
     })
 });

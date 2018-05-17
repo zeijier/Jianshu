@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:api');
     }
 
     public function index()
@@ -108,5 +108,7 @@ class PostController extends Controller
             'msg'=>'成功'
         ];
     }
+
+
 
 }
