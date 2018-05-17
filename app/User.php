@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -28,5 +29,30 @@ class User extends Authenticatable
     ];
     public function post(){
         return $this->hasMany(Post::class);
+    }
+//     有多少粉丝的关联
+    public function fans(){
+        return $this->belongsToMany(User::class,'fans','user_id','fans_id');
+    }
+//    关注某人 的关联
+    public function following(){
+        return $this->belongsToMany(User::class,'fans','fans_id','user_id');
+    }
+
+    //    关注操作
+    public function isGuanzhu($ids,$num){
+        if (is_array($ids)){
+            $ids = compact($ids);
+        }
+//      $num 为1 则是关注，为0则是取消关注
+        if ($num == 1){
+            $this->following()->sync($ids,false);
+        }else{
+            $this->following()->detach($ids);
+        }
+    }
+//    是否关注
+    public function isFollowing($user_id){
+        return $this->following->contains($user_id);
     }
 }

@@ -8,9 +8,9 @@
                         <form action="{{route('posts.update',$post->id)}}" method="POST" accept-charset="UTF-8">
                             {{method_field('PUT')}}
                             {{csrf_field()}}
-                            <input type="text" name="title" value="{{$post->title}}"><br>
-                            <textarea style="width: 80%;height: 180px;" placeholder="内容" name="content">{{$post->content}}</textarea><br>
-                            <button type="submit">更新</button>
+                            <input class="form-control" type="text" name="title" value="{{$post->title}}"><br>
+                            <textarea class="form-control" rows="3" placeholder="内容" name="content">{{$post->content}}</textarea><br>
+                            <button class="btn btn-default" type="submit">更新</button>
                         </form>
                     </div>
                     @include('layouts.errors')

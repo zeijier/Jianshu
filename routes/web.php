@@ -34,3 +34,5 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('posts','PostController');
 Route::resource('users','UserController',['only'=>['edit','show','update']]);
+
+Route::post('star','PostController@zan')->name('star');

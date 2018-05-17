@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\postRequest;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -89,4 +92,21 @@ class PostController extends Controller
         $post->delete();
         return redirect()->back()->with('success','删除成功！');
     }
+//    关注逻辑
+    public function zan(Request $request){
+//        获取到当前用户
+        $user = Auth::user();
+        switch ($request->num){
+            case 1://关注
+                $user->isGuanzhu($request->id,1);
+                break;
+            case 0://取消关注
+                $user->isGuanzhu($request->id,0);
+                break;
+        }
+        return [
+            'msg'=>'成功'
+        ];
+    }
+
 }
