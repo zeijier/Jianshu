@@ -13,12 +13,13 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request,Post $post)
     {
-        $posts = Post::paginate(10);
+//        $posts = Post::paginate(10);
+        $posts = $post->witchOrder($request->render)->paginate(10);
         return view('home',compact('posts'));
     }
 
