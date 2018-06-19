@@ -55,13 +55,17 @@
                                     <li>
                                        <a href="{{route('users.show',Auth::id())}}">个人中心</a>
                                     </li>
+                                    @can('manage_contents')
+                                    <li>
+                                        <a href="{{url(config('administrator.uri'))}}">管理后台</a>
+                                    </li>
+                                    @endcan
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            退出
                                         </a>
-
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>

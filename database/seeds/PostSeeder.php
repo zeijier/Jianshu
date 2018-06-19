@@ -4,13 +4,9 @@ use App\Post;
 use App\User;
 use Illuminate\Database\Seeder;
 
-class postseeder extends Seeder
+class PostSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         $users_id = User::all()->pluck('id')->toArray();
